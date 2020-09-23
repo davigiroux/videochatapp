@@ -1,4 +1,9 @@
-navigator.mediaDevices.getUserMedia({video: true, audio: true}).then(async (stream) => {
+const parametros = {
+    video: true, 
+    audio: true
+}
+
+navigator.mediaDevices.getUserMedia(parametros).then(async (stream) => {
     const deveMostrarCampoParaConectar = location.hash === "#init";
     var peer = new Peer({
         initiator: deveMostrarCampoParaConectar,
@@ -73,14 +78,25 @@ navigator.mediaDevices.getUserMedia({video: true, audio: true}).then(async (stre
         const video = document.querySelector("#meuVideo")
         video.srcObject = stream;
         video.play();
+        video.muted = true;
     }
 
     function criarVideoDoOutro(streamDoOutro) {
+
+        if(document.querySelector("#videoDaOutraPessoa")) return;
+
         const divDoVideo = document.querySelector("#outroVideo")
         const outroVideo = document.createElement("video")
+        outroVideo.setAttribute("id", "videoDaOutraPessoa")
+        outroVideo.setAttribute("width", "320")
+        outroVideo.setAttribute("height", "240")
         divDoVideo.appendChild(outroVideo)
         outroVideo.srcObject = streamDoOutro;
         outroVideo.play();
     }
+
+    document.querySelector("#muteVideo").addEventListener("change", e => {
+        stream.getAudioTracks()[0].enabled = !e.target.checked;
+    })
 
 }).catch(erro => console.error(erro))
