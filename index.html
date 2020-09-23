@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste</title>
+    <link rel="stylesheet" href="./static/css/style.css">
+    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script src="./static/js/chat.js"></script>
+</head>
+<body>
+    <section class="container">
+        <div class="esquerda">
+            <h1>Mensagem</h1>
+        
+            <input type="text" id="idParaConectar" placeholder="Id da outra pessoa"> 
+            <button type="button" id="botaoConectar">Conectar</button>
+            <br>
+            <br>
+            Meu id é: <strong><span id="idDoChat"></span></strong>
+            <br>
+            <p style="display: none;" id="infoDeConexao"></p>
+            <br>
+            <br>
+            <textarea id="mensagem" cols="30" rows="10"></textarea>
+            <div>
+                <button type="button" class="button" id="botaoEnviarMensagem">Enviar</button>
+            </div>
+        </div>
+        <div class="direita">
+            <h1>Chat</h1>
+            <section id="logDoChat">
+            </section>
+        </div>
+        <div>
+            <div class="esquerda">
+                <h2>Meu vídeo</h2>
+                <video id="meuVideo"></video>
+            </div>
+            <div class="direita" id="outroVideo">
+                <h2>Outra pessoa</h2>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

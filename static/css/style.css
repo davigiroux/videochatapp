@@ -1,0 +1,21 @@
+.container {
+    margin: 30px 50px;
+}
+
+.button {
+    padding: 10px 15px;
+    background-color: #249c9c;
+    color: azure;
+    border: none;
+    border-radius: 3px;
+}
+
+.esquerda {
+    float: left;
+    width: 50%;
+}
+
+.direita {
+    float: right;
+    width: 50%;
+}
