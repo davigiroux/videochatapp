@@ -1,11 +1,13 @@
-navigator.mediaDevices.getUserMedia({video: true, audio: false}).then(async (stream) => {
+navigator.mediaDevices.getUserMedia({video: true, audio: true}).then(async (stream) => {
+    const deveMostrarCampoParaConectar = location.hash === "#init";
     var peer = new Peer({
-        initiator: location.hash === "#init",
+        initiator: deveMostrarCampoParaConectar,
         trickle: false
     });
     let connection;
     criarMeuVideo(stream)
-    
+
+    document.querySelector("#campoParaConectar").style.display = deveMostrarCampoParaConectar ? "block" : "none";
     document.querySelector("#botaoEnviarMensagem").addEventListener("click", enviarMensagem)
     document.querySelector("#botaoConectar").addEventListener("click", conectar)
 
@@ -21,7 +23,6 @@ navigator.mediaDevices.getUserMedia({video: true, audio: false}).then(async (str
     })
 
     peer.on("connection", conn => {
-        console.log("Conexão recebida")
         connection = conn;
         document.querySelector("#infoDeConexao").innerHTML = `<strong>Conectado com ${conn.peer}!</strong>`
         document.querySelector("#infoDeConexao").style.display = "block"
@@ -75,13 +76,11 @@ navigator.mediaDevices.getUserMedia({video: true, audio: false}).then(async (str
     }
 
     function criarVideoDoOutro(streamDoOutro) {
-        console.log(streamDoOutro)
         const divDoVideo = document.querySelector("#outroVideo")
         const outroVideo = document.createElement("video")
         divDoVideo.appendChild(outroVideo)
         outroVideo.srcObject = streamDoOutro;
         outroVideo.play();
-        console.log(outroVideo)
     }
 
 }).catch(erro => console.error(erro))
