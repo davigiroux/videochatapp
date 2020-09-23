@@ -61,12 +61,14 @@ navigator.mediaDevices.getUserMedia(parametros).then(async (stream) => {
         const mensagem = document.querySelector("#mensagem").value;
         connection.send(mensagem)
         logarNoChat(mensagem, "Eu")
+        
+        document.querySelector("#mensagem").value = "";
     }
 
     function logarNoChat(mensagem, pessoa) {
         const novoSpan = document.createElement("span");
         novoSpan.innerHTML = `
-            <h3>${pessoa}</h3>
+            <strong>${pessoa}: </strong>
             ${mensagem}
             <br>
             <br>
@@ -98,5 +100,13 @@ navigator.mediaDevices.getUserMedia(parametros).then(async (stream) => {
     document.querySelector("#muteVideo").addEventListener("change", e => {
         stream.getAudioTracks()[0].enabled = !e.target.checked;
     })
+
+    document.body.addEventListener('keyup', function (e) {
+        if (e.keyCode == 13) {
+          // Simulate clicking on the submit button.
+          enviarMensagem()
+        }
+      });
+      
 
 }).catch(erro => console.error(erro))
